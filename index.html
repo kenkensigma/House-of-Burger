@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>House of Burger - Best Burger in Town</title>
+    <!-- Link ke Google Fonts untuk font Bebas Neue dan Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ==========================================
+       BAGIAN 1: RESET & BASIC STYLING
+       Ini mengatur ulang style default browser
+       ========================================== */
+
+      * {
+        margin: 0; /* Hilangkan margin default */
+        padding: 0; /* Hilangkan padding default */
+        box-sizing: border-box; /* Biar width/height include padding & border */
+      }
+
+      body {
+        font-family: "Poppins", sans-serif; /* Font utama untuk semua teks */
+        background-color: #1a1a2e; /* Warna background gelap */
+        color: #f5f5f5; /* Warna teks putih keabuan */
+        overflow-x: hidden; /* Cegah scroll horizontal */
+      }
+
+      html {
+        scroll-behavior: smooth; /* Biar scroll nya smooth/halus */
+      }
+
+      /* Font khusus untuk judul/heading yang besar */
+      .font-display {
+        font-family: "Bebas Neue", sans-serif;
+      }
+
+      /* ==========================================
+       BAGIAN 2: BACKGROUND PATTERN
+       Pattern titik-titik di background
+       ========================================== */
+
+      .bg-pattern {
+        position: fixed; /* Tetap di tempat saat scroll */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Di belakang semua konten */
+        background-color: #1a1a2e;
+        /* Pattern SVG berulang untuk dekorasi */
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      /* ==========================================
+       BAGIAN 3: NAVIGATION BAR (Menu Atas)
+       Menu yang nempel di atas saat scroll
+       ========================================== */
+
+      nav {
+        position: sticky; /* Nempel di atas saat scroll */
+        top: 0;
+        background: rgba(26, 26, 46, 0.95); /* Background semi transparan */
+        backdrop-filter: blur(10px); /* Efek blur di belakangnya */
+        border-bottom: 1px solid rgba(255, 107, 53, 0.3); /* Garis orange tipis */
+        z-index: 1000; /* Di atas semua elemen */
+        padding: 1.25rem 0; /* Padding atas bawah */
+      }
+
+      .nav-container {
+        max-width: 1200px; /* Lebar maksimal container */
+        margin: 0 auto; /* Center container */
+        padding: 0 2rem; /* Padding kiri kanan */
+        display: flex; /* Flexbox untuk layout */
+        justify-content: space-between; /* Pisah kiri kanan */
+        align-items: center; /* Vertical center */
+      }
+
+      /* Logo di kiri atas */
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem; /* Jarak antara icon dan teks */
+      }
+
+      .logo-icon {
+        font-size: 2.5rem; /* Ukuran emoji burger */
+      }
+
+      .logo-text {
+        font-size: 1.875rem; /* Ukuran teks "HOUSE OF BURGER" */
+        letter-spacing: 0.1em; /* Jarak antar huruf */
+        color: #ff6b35; /* Warna orange */
+      }
+
+      /* Link-link menu (Home, About, Menu, Contact) */
+      .nav-links {
+        display: flex;
+        gap: 2rem; /* Jarak antar link */
+        align-items: center;
+        list-style: none; /* Hilangkan bullet point */
+      }
+
+      .nav-link {
+        text-decoration: none; /* Hilangkan underline */
+        color: #f5f5f5; /* Warna putih */
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        position: relative; /* Untuk efek garis bawah */
+        transition: color 0.3s; /* Animasi perubahan warna */
+      }
+
+      /* Garis bawah yang muncul saat hover */
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0; /* Awalnya gak keliatan */
+        height: 3px;
+        background: currentColor;
+        transition: width 0.3s; /* Animasi munculnya garis */
+      }
+
+      /* Saat hover atau active, garis muncul */
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Link yang sedang aktif jadi orange */
+      .nav-link.active {
+        color: #ff6b35;
+      }
+
+      /* Tombol "ORDER NOW" */
+      .order-btn {
+        background: #ff6b35; /* Background orange */
+        color: #1a1a2e; /* Teks gelap */
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px; /* Bulat penuh */
+        border: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer; /* Cursor jadi pointer */
+        transition: transform 0.3s, box-shadow 0.3s; /* Animasi */
+      }
+
+      /* Efek saat hover tombol */
+      .order-btn:hover {
+        transform: scale(1.05); /* Membesar 5% */
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4); /* Bayangan orange */
+      }
+
+      /* Tombol menu mobile (disembunyiin dulu di desktop) */
+      .mobile-menu-btn {
+        display: none; /* Gak muncul di desktop */
+        background: none;
+        border: none;
+        color: #f5f5f5;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* ==========================================
+       BAGIAN 4: RUNNING TEXT (Teks Berjalan)
+       Banner teks yang jalan terus
+       ========================================== */
+
+      .running-text-wrapper {
+        overflow: hidden; /* Sembunyikan yang keluar */
+        background: rgba(255, 107, 53, 0.1); /* Background orange tipis */
+        border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        padding: 1rem 0;
+      }
+
+      .running-text {
+        display: flex;
+        gap: 3rem; /* Jarak antar teks */
+        animation: scroll-left 30s linear infinite; /* Animasi jalan terus */
+        white-space: nowrap; /* Teks gak wrap/turun */
+      }
+
+      .running-text span {
+        font-weight: 600;
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        color: #ff6b35;
+      }
+
+      /* Animasi untuk running text - geser dari kanan ke kiri */
+      @keyframes scroll-left {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ==========================================
+       BAGIAN 5: CONTAINER & SECTION
+       Layout dasar untuk semua section
+       ========================================== */
+
+      .container {
+        max-width: 1200px; /* Lebar maksimal konten */
+        margin: 0 auto; /* Center konten */
+        padding: 0 2rem; /* Padding kiri kanan */
+      }
+
+      section {
+        min-height: 100vh; /* Minimal setinggi layar */
+        padding: 5rem 2rem; /* Padding atas bawah & kiri kanan */
+        display: flex;
+        align-items: center; /* Center vertical */
+      }
+
+      /* Header untuk setiap section (About, Menu, Contact) */
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem; /* Jarak ke konten bawahnya */
+      }
+
+      /* Tag kecil di atas judul (contoh: "TENTANG KAMI") */
+      .section-tag {
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.15em; /* Jarak huruf agak lebar */
+        color: #ff6b35;
+        margin-bottom: 1rem;
+      }
+
+      /* Judul besar section */
+      .section-title {
+        font-size: 3.5rem;
+        color: #f5f5f5;
+      }
+
+      /* ==========================================
+       BAGIAN 6: HOME SECTION (Hero)
+       Section pertama dengan judul besar
+       ========================================== */
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 kolom sama lebar */
+        gap: 3rem; /* Jarak antar kolom */
+        align-items: center;
+      }
+
+      .hero-content {
+        text-align: left;
+      }
+
+      /* Judul utama "TASTE THE PERFECTION" */
+      .hero-title {
+        font-size: 5rem;
+        line-height: 1;
+        margin-bottom: 1.5rem;
+        animation: slideUp 0.6s ease-out; /* Animasi muncul dari bawah */
+      }
+
+      /* Warna orange untuk "PERFECTION" */
+      .hero-title .highlight {
+        color: #ff6b35;
+      }
+
+      /* Tagline di bawah judul */
+      .hero-tagline {
+        font-size: 1.25rem;
+        opacity: 0.8; /* Agak transparan */
+        margin-bottom: 2rem;
+        animation: slideUp 0.6s ease-out 0.1s backwards; /* Delay 0.1s */
+      }
+
+      /* Container untuk 2 tombol */
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        animation: slideUp 0.6s ease-out 0.2s backwards; /* Delay 0.2s */
+      }
+
+      /* Tombol primary (orange) */
+      .btn-primary {
+        background: #ff6b35;
+        color: #1a1a2e;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: 700;
+        font-size: 1.125rem;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+      }
+
+      /* Tombol secondary (outline) */
+      .btn-secondary {
+        background: transparent;
+        color: #f5f5f5;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        border: 2px solid #f5f5f5;
+        font-weight: 700;
+        font-size: 1.125rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .btn-secondary:hover {
+        transform: scale(1.05);
+      }
+
+      /* Statistik (50K+, 6, 4.9) */
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+        gap: 2rem;
+        animation: slideUp 0.6s ease-out 0.3s backwards;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      /* Angka besar */
+      .stat-number {
+        font-size: 2.5rem;
+        color: #ff6b35;
+      }
+
+      /* Label kecil di bawah angka */
+      .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
+
+      /* Animasi slide up - muncul dari bawah */
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ==========================================
+       BAGIAN 7: HERO IMAGE (Gambar Burger SVG)
+       Gambar burger yang melayang-layang
+       ========================================== */
+
+      .hero-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* SVG burger */
+      .burger-svg {
+        width: 400px;
+        height: 400px;
+        animation: float 4s ease-in-out infinite; /* Animasi melayang */
+      }
+
+      /* Animasi float - naik turun pelan */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Emoji yang melayang di sekitar burger */
+      .floating-emoji {
+        position: absolute;
+        font-size: 3rem;
+        animation: bounce 2s infinite;
+      }
+
+      /* Posisi masing-masing emoji */
+      .emoji-1 {
+        top: 10%;
+        left: 10%;
+        animation-delay: 0.5s;
+      }
+      .emoji-2 {
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 1s;
+      }
+      .emoji-3 {
+        top: 50%;
+        right: 0;
+        animation-delay: 1.5s;
+      }
+
+      /* Animasi bounce - mental-mental */
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      /* ==========================================
+       BAGIAN 8: ABOUT SECTION
+       Section tentang cerita brand
+       ========================================== */
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      /* Box untuk gambar SVG chef */
+      .about-image {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 53, 0.2),
+          rgba(26, 26, 46, 0.8)
+        );
+        border-radius: 30px;
+        padding: 2rem;
+      }
+
+      .about-image svg {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Paragraf di about section */
+      .about-text p {
+        font-size: 1.125rem;
+        line-height: 1.8; /* Jarak antar baris */
+        opacity: 0.9;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Grid untuk 4 fitur (Quality Meat, Fresh Daily, dll) */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      /* Icon bulat untuk setiap fitur */
+      .feature-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 107, 53, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0; /* Gak mengecil */
+      }
+
+      .feature-text h4 {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .feature-text p {
+        font-size: 0.875rem;
+        opacity: 0.7;
+        margin: 0;
+      }
+
+      /* ==========================================
+       BAGIAN 9: MENU SECTION
+       Section untuk daftar burger & minuman
+       ========================================== */
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      /* Card untuk setiap menu burger */
+      .menu-card {
+        background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+        border: 1px solid rgba(255, 107, 53, 0.2);
+        border-radius: 30px;
+        padding: 2rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+      }
+
+      /* Efek saat hover - naik dan ada bayangan */
+      .menu-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+      }
+
+      /* Animasi stagger untuk setiap card menu */
+      .menu-card:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      .menu-card:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      .menu-card:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+      .menu-card:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+      .menu-card:nth-child(5) {
+        transition-delay: 0.5s;
+      }
+      .menu-card:nth-child(6) {
+        transition-delay: 0.6s;
+      }
+
+      /* Emoji besar untuk icon menu */
+      .menu-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Badge kategori (CHICKEN, BEEF, dll) */
+      .menu-badge {
+        display: inline-block;
+        background: rgba(255, 107, 53, 0.2);
+        color: #ff6b35;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      /* Nama burger */
+      .menu-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Deskripsi ingredientsnya */
+      .menu-desc {
+        font-size: 0.875rem;
+        opacity: 0.7;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      /* Harga */
+      .menu-price {
+        font-size: 2rem;
+        color: #ff6b35;
+        margin-bottom: 1rem;
+      }
+
+      /* Tombol tambah ke keranjang */
+      .menu-btn {
+        width: 100%;
+        background: #ff6b35;
+        color: #1a1a2e;
+        padding: 0.75rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .menu-btn:hover {
+        transform: scale(1.05);
+      }
+
+      /* Card khusus untuk menu signature (featured) */
+      .menu-card.featured {
+        background: linear-gradient(145deg, #ff6b35, #e55a2b);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .menu-card.featured .menu-badge {
+        background: rgba(255, 255, 255, 0.3);
+        color: #1a1a2e;
+      }
+
+      .menu-card.featured .menu-title,
+      .menu-card.featured .menu-desc,
+      .menu-card.featured .menu-price {
+        color: #1a1a2e;
+      }
+
+      .menu-card.featured .menu-desc {
+        opacity: 0.8;
+      }
+
+      .menu-card.featured .menu-btn {
+        background: #1a1a2e;
+        color: #ff6b35;
+      }
+
+      /* Judul untuk bagian minuman */
+      .drinks-title {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      /* Grid untuk minuman (4 kolom) */
+      .drinks-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+
+      /* Card untuk setiap minuman */
+      .drink-card {
+        background: rgba(255, 107, 53, 0.1);
+        border-radius: 20px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .drink-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .drink-name {
+        font-weight: 600;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .drink-price {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #ff6b35;
+      }
+
+      /* ==========================================
+       BAGIAN 10: CONTACT SECTION
+       Section untuk kontak info & form
+       ========================================== */
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      /* Card untuk info kontak dan form */
+      .contact-card {
+        background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+        border: 1px solid rgba(255, 107, 53, 0.2);
+        border-radius: 30px;
+        padding: 2rem;
+      }
+
+      .contact-title {
+        font-size: 1.5rem;
+        color: #ff6b35;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .contact-item {
+        display: flex;
+        gap: 1rem;
+      }
+
+      /* Icon bulat untuk alamat, telepon, email, dll */
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 107, 53, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .contact-details h4 {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .contact-details p {
+        opacity: 0.8;
+        margin: 0;
+      }
+
+      /* Social media links */
+      .social-links {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 107, 53, 0.2);
+      }
+
+      .social-links h4 {
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      /* Icon social media bulat */
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 107, 53, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: transform 0.3s;
+      }
+
+      .social-icon:hover {
+        transform: scale(1.1);
+      }
+
+      /* ==========================================
+       BAGIAN 11: FORM STYLING
+       Style untuk form kontak
+       ========================================== */
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Input fields (text, email, select, textarea) */
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        background: #1a1a2e;
+        border: 2px solid rgba(255, 107, 53, 0.3);
+        border-radius: 15px;
+        padding: 0.75rem 1rem;
+        color: #f5f5f5;
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      /* Saat input di-focus, border jadi orange penuh */
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #ff6b35;
+      }
+
+      .form-group textarea {
+        resize: none; /* Gak bisa diresize */
+      }
+
+      /* Tombol submit */
+      .submit-btn {
+        width: 100%;
+        background: #ff6b35;
+        color: #1a1a2e;
+        padding: 1rem;
+        border-radius: 15px;
+        border: none;
+        font-weight: 700;
+        font-size: 1.125rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .submit-btn:hover {
+        transform: scale(1.05);
+      }
+
+      /* Pesan sukses setelah form di-submit */
+      .form-success {
+        display: none; /* Awalnya disembunyikan */
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+        padding: 1rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .form-success.show {
+        display: block; /* Muncul saat ada class "show" */
+      }
+
+      /* ==========================================
+       BAGIAN 12: GOOGLE MAPS
+       Container untuk embed Google Maps
+       ========================================== */
+
+      .map-container {
+        border-radius: 30px;
+        overflow: hidden; /* Biar sudut rounded terpotong */
+        border: 3px solid rgba(255, 107, 53, 0.3);
+      }
+
+      .map-container iframe {
+        width: 100%;
+        height: 450px;
+        border: 0;
+      }
+
+      /* ==========================================
+       BAGIAN 13: FOOTER
+       Footer di bagian paling bawah
+       ========================================== */
+
+      footer {
+        padding: 2rem;
+        border-top: 1px solid rgba(255, 107, 53, 0.2);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .footer-logo-text {
+        font-size: 1.25rem;
+        color: #ff6b35;
+      }
+
+      .footer-text {
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-link {
+        color: #f5f5f5;
+        text-decoration: none;
+        font-size: 0.875rem;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .footer-link:hover {
+        opacity: 1;
+      }
+
+      /* ==========================================
+       BAGIAN 14: ANIMASI SCROLL VARIATIF
+       Berbagai macam animasi muncul saat scroll ke section
+       ANIMASI AKAN BERULANG setiap kali scroll masuk/keluar
+       ========================================== */
+
+      /* Animasi default - fade up dari bawah */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Animasi slide dari kiri */
+      .slide-left {
+        opacity: 0;
+        transform: translateX(-100px);
+        transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .slide-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Animasi slide dari kanan */
+      .slide-right {
+        opacity: 0;
+        transform: translateX(100px);
+        transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .slide-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Animasi zoom in */
+      .zoom-in {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .zoom-in.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Animasi rotate in */
+      .rotate-in {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.9);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .rotate-in.visible {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+
+      /* Animasi flip dari bawah */
+      .flip-up {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(45deg);
+        transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+      }
+
+      .flip-up.visible {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg);
+      }
+
+      /* Animasi bounce in */
+      .bounce-in {
+        opacity: 0;
+        transform: scale(0.5);
+        transition: opacity 0.6s ease-out,
+          transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .bounce-in.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Animasi blur in */
+      .blur-in {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, filter 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .blur-in.visible {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+
+      /* ========================================== BAGIAN 15: RESPONSIVE DESIGN Styling untuk layar mobile/tablet ========================================== */ /* Tablet (768px - 1024px) */
+      @media (max-width: 1024px) {
+        .container {
+          padding: 0 1.5rem;
+        }
+        .menu-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .drinks-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      } /* Mobile & Tablet (max 768px) */
+      @media (max-width: 768px) {
+        /* Navigation */
+        .nav-container {
+          padding: 0 1rem;
+        }
+        .logo-text {
+          font-size: 1.25rem;
+        }
+        .logo-icon {
+          font-size: 1.75rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .mobile-menu-btn {
+          display: block;
+        } /* Running text */
+        .running-text span {
+          font-size: 0.75rem;
+        } /* Section padding */
+        section {
+          padding: 3rem 1rem;
+          min-height: auto;
+        }
+        .container {
+          padding: 0 1rem;
+        } /* Hero Section */
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .hero-content {
+          text-align: center;
+        }
+        .hero-title {
+          font-size: 2.5rem;
+          line-height: 1.1;
+        }
+        .hero-tagline {
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+        }
+        .hero-buttons {
+          flex-direction: column;
+          margin-bottom: 2rem;
+        }
+        .btn-primary,
+        .btn-secondary {
+          width: 100%;
+          padding: 0.875rem 1.5rem;
+          font-size: 1rem;
+        }
+        .hero-stats {
+          gap: 1rem;
+        }
+        .stat-number {
+          font-size: 2rem;
+        }
+        .stat-label {
+          font-size: 0.75rem;
+        }
+        .burger-svg {
+          width: 280px;
+          height: 280px;
+        }
+        .floating-emoji {
+          font-size: 2rem;
+        } /* Section Headers */
+        .section-header {
+          margin-bottom: 2.5rem;
+        }
+        .section-tag {
+          font-size: 0.75rem;
+        }
+        .section-title {
+          font-size: 2rem;
+        } /* About Section */
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .about-text p {
+          font-size: 1rem;
+          margin-bottom: 1rem;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        } /* Menu Section */
+        .menu-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .menu-card {
+          padding: 1.5rem;
+        }
+        .menu-icon {
+          font-size: 3rem;
+        }
+        .menu-title {
+          font-size: 1.25rem;
+        }
+        .menu-price {
+          font-size: 1.5rem;
+        }
+        .drinks-title {
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+        .drinks-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+        .drink-card {
+          padding: 1rem;
+        }
+        .drink-icon {
+          font-size: 2.5rem;
+        } /* Contact Section */
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .contact-card {
+          padding: 1.5rem;
+        }
+        .contact-title {
+          font-size: 1.25rem;
+        }
+        .contact-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
+        }
+        .map-container iframe {
+          height: 300px;
+        } /* Footer */
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+          gap: 1.5rem;
+        }
+        .footer-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      } /* Small Mobile (max 480px) */
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 2rem;
+        }
+        .section-title {
+          font-size: 1.75rem;
+        }
+        .burger-svg {
+          width: 240px;
+          height: 240px;
+        }
+        .hero-stats {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        .stat-item {
+          padding: 1rem;
+          background: rgba(255, 107, 53, 0.1);
+          border-radius: 15px;
+        }
+        .drinks-grid {
+          grid-template-columns: 1fr;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .menu-icon {
+          font-size: 2.5rem;
+        }
+        .menu-title {
+          font-size: 1.125rem;
+        }
+        .btn-primary,
+        .btn-secondary {
+          font-size: 0.875rem;
+          padding: 0.75rem 1.25rem;
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  </head>
+  <body>
+    <!-- Background Pattern (pattern titik-titik) -->
+    <div class="bg-pattern"></div>
+    <!-- ==========================================
+       NAVIGATION BAR
+       Menu navigasi di bagian atas
+       ========================================== -->
+    <nav>
+      <div class="nav-container">
+        <!-- Logo (Emoji + Teks) -->
+        <div class="logo">
+          <span class="logo-icon">🍔</span>
+          <span class="logo-text font-display">HOUSE OF BURGER</span>
+        </div>
+        <!-- Menu Links (Desktop) -->
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active">HOME</a></li>
+          <li><a href="#about" class="nav-link">ABOUT</a></li>
+          <li><a href="#menu" class="nav-link">MENU</a></li>
+          <li><a href="#contact" class="nav-link">CONTACT</a></li>
+          <li><button class="order-btn">ORDER NOW</button></li>
+        </ul>
+        <!-- Tombol Menu Mobile (muncul di layar kecil) -->
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </nav>
+    <!-- ==========================================
+       RUNNING TEXT BANNER
+       Teks yang berjalan horizontal
+       ========================================== -->
+    <div class="running-text-wrapper">
+      <div class="running-text">
+        <!-- Teks ini akan diduplikasi di JavaScript biar seamless -->
+        <span>🍔 BEST BURGER IN TOWN</span>
+        <span>🔥 PREMIUM QUALITY BEEF</span>
+        <span>🌿 FRESH INGREDIENTS DAILY</span> <span>⭐ RATED 4.9/5</span>
+        <span>🚀 FAST DELIVERY</span> <span>���� 100% HALAL</span>
+        <span>🍔 BEST BURGER IN TOWN</span>
+        <span>🔥 PREMIUM QUALITY BEEF</span>
+        <span>🌿 FRESH INGREDIENTS DAILY</span> <span>⭐ RATED 4.9/5</span>
+        <span>🚀 FAST DELIVERY</span> <span>💯 100% HALAL</span>
+      </div>
+    </div>
+    <!-- ==========================================
+       HOME SECTION (HERO)
+       Section pertama dengan judul besar
+       ========================================== -->
+    <section id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Kolom Kiri: Teks & CTA -->
+          <div class="hero-content">
+            <h1 class="hero-title font-display">
+              TASTE THE<br /><span class="highlight">PERFECTION</span>
+            </h1>
+            <p class="hero-tagline">
+              Burger premium dengan daging sapi pilihan, saus rahasia, dan
+              bahan-bahan segar berkualitas tinggi.
+            </p>
+            <!-- 2 Tombol CTA -->
+            <div class="hero-buttons">
+              <button class="btn-primary">🍔 Pesan Sekarang</button>
+              <button class="btn-secondary">Lihat Menu</button>
+            </div>
+            <!-- Statistik (50K+ customers, dll) -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number font-display">50K+</div>
+                <div class="stat-label">Happy Customers</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number font-display">6</div>
+                <div class="stat-label">Menu Variants</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number font-display">4.9</div>
+                <div class="stat-label">Rating</div>
+              </div>
+            </div>
+          </div>
+          <!-- Kolom Kanan: Gambar Burger SVG -->
+          <div class="hero-image">
+            <!-- SVG gambar burger yang dibuat manual dengan path -->
+            <svg viewbox="0 0 400 400" class="burger-svg">
+              <!-- Bayangan burger -->
+              <ellipse
+                cx="200"
+                cy="370"
+                rx="120"
+                ry="20"
+                fill="rgba(0,0,0,0.3)"
+              />
+              <!-- Bottom Bun (Roti bawah) -->
+              <path
+                d="M80 280 Q80 320 200 320 Q320 320 320 280 L320 260 Q320 250 200 250 Q80 250 80 260 Z"
+                fill="#D2691E"
+              />
+              <path
+                d="M90 265 Q90 255 200 255 Q310 255 310 265"
+                fill="#8B4513"
+                opacity="0.3"
+              />
+              <!-- Lettuce (Selada) -->
+              <path
+                d="M70 250 Q100 270 130 245 Q160 270 190 245 Q220 270 250 245 Q280 270 310 245 Q330 260 330 250 L330 240 Q200 220 70 240 Z"
+                fill="#228B22"
+              />
+              <!-- Tomato (Tomat) -->
+              <ellipse cx="200" cy="230" rx="110" ry="20" fill="#FF6347" />
+              <ellipse cx="200" cy="225" rx="100" ry="15" fill="#FF4500" />
+              <!-- Cheese (Keju) -->
+              <path
+                d="M75 210 L85 230 L115 210 L125 230 L155 210 L165 230 L195 210 L205 230 L235 210 L245 230 L275 210 L285 230 L315 210 L325 220 Q200 240 75 220 Z"
+                fill="#FFD700"
+              />
+              <!-- Patty (Daging) -->
+              <ellipse cx="200" cy="195" rx="115" ry="25" fill="#4A2C2A" />
+              <ellipse cx="200" cy="190" rx="105" ry="20" fill="#6B4423" />
+              <!-- Top Bun (Roti atas) -->
+              <path
+                d="M80 180 Q80 100 200 80 Q320 100 320 180 Q320 200 200 200 Q80 200 80 180 Z"
+                fill="#D2691E"
+              />
+              <!-- Sesame Seeds (Biji wijen) -->
+              <ellipse cx="150" cy="120" rx="8" ry="5" fill="#FFFACD" />
+              <ellipse cx="200" cy="100" rx="8" ry="5" fill="#FFFACD" />
+              <ellipse cx="250" cy="120" rx="8" ry="5" fill="#FFFACD" />
+              <ellipse cx="175" cy="145" rx="7" ry="4" fill="#FFFACD" />
+              <ellipse cx="225" cy="145" rx="7" ry="4" fill="#FFFACD" />
+              <ellipse cx="130" cy="150" rx="6" ry="4" fill="#FFFACD" />
+              <ellipse cx="270" cy="150" rx="6" ry="4" fill="#FFFACD" />
+              <!-- Highlight (efek cahaya) -->
+              <ellipse
+                cx="170"
+                cy="110"
+                rx="25"
+                ry="10"
+                fill="rgba(255,255,255,0.2)"
+              /></svg
+            ><!-- Emoji yang melayang di sekitar burger -->
+            <div class="floating-emoji emoji-1">🍟</div>
+            <div class="floating-emoji emoji-2">🥤</div>
+            <div class="floating-emoji emoji-3">✨</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================
+       ABOUT SECTION
+       Section tentang cerita brand
+       ========================================== -->
+    <section id="about">
+      <div class="container">
+        <!-- Header Section dengan animasi fade-in -->
+        <div class="section-header fade-in">
+          <div class="section-tag">TENTANG KAMI</div>
+          <h2 class="section-title font-display">CERITA KAMI</h2>
+        </div>
+        <div class="about-grid">
+          <!-- Kolom Kiri: Ilustrasi SVG Chef - slide dari kiri -->
+          <div class="about-image slide-left">
+            <svg viewbox="0 0 400 300">
+              <!-- Background kitchen -->
+              <rect x="0" y="0" width="400" height="300" fill="#2a2a3e" />
+              <rect x="0" y="200" width="400" height="100" fill="#3a3a4e" />
+              <!-- Chef Character -->
+              <circle cx="200" cy="130" r="35" fill="#FFE4C4" />
+              <!-- Chef Hat -->
+              <path
+                d="M165 95 Q165 60 200 60 Q235 60 235 95 L235 85 Q235 55 200 50 Q165 55 165 85 Z"
+                fill="white"
+              />
+              <!-- Chef Body -->
+              <rect x="175" y="165" width="50" height="60" fill="white" />
+              <!-- Chef Face -->
+              <circle cx="190" cy="120" r="5" fill="#333" />
+              <circle cx="210" cy="120" r="5" fill="#333" />
+              <path
+                d="M190 140 Q200 150 210 140"
+                stroke="#333"
+                stroke-width="2"
+                fill="none"
+              />
+              <!-- Grill with burgers -->
+              <rect x="50" y="180" width="120" height="40" rx="5" fill="#444" />
+              <line
+                x1="60"
+                y1="195"
+                x2="160"
+                y2="195"
+                stroke="#666"
+                stroke-width="3"
+              />
+              <line
+                x1="60"
+                y1="205"
+                x2="160"
+                y2="205"
+                stroke="#666"
+                stroke-width="3"
+              />
+              <!-- Burgers on grill -->
+              <ellipse cx="90" cy="185" rx="20" ry="8" fill="#6B4423" />
+              <ellipse cx="130" cy="185" rx="20" ry="8" fill="#6B4423" />
+              <!-- Steam/smoke -->
+              <path
+                d="M85 170 Q80 160 85 150"
+                stroke="rgba(255,255,255,0.5)"
+                stroke-width="2"
+                fill="none"
+              />
+              <path
+                d="M95 165 Q90 155 95 145"
+                stroke="rgba(255,255,255,0.5)"
+                stroke-width="2"
+                fill="none"
+              />
+              <path
+                d="M125 170 Q120 160 125 150"
+                stroke="rgba(255,255,255,0.5)"
+                stroke-width="2"
+                fill="none"
+              />
+              <path
+                d="M135 165 Q130 155 135 145"
+                stroke="rgba(255,255,255,0.5)"
+                stroke-width="2"
+                fill="none"
+              />
+              <!-- Ingredients (tomato, lettuce, cheese) -->
+              <circle cx="300" cy="170" r="15" fill="#FF6347" />
+              <circle cx="330" cy="180" r="12" fill="#228B22" />
+              <circle cx="350" cy="165" r="10" fill="#FFD700" />
+              <!-- Text label -->
+              <text
+                x="200"
+                y="280"
+                text-anchor="middle"
+                fill="#ff6b35"
+                font-size="14"
+                font-weight="bold"
+              >
+                FRESH • QUALITY • DELICIOUS
+              </text>
+            </svg>
+          </div>
+          <!-- Kolom Kanan: Teks About - slide dari kanan -->
+          <div class="about-text slide-right">
+            <p>
+              House of Burger didirikan dengan satu misi sederhana: menghadirkan
+              burger terbaik dengan bahan-bahan premium dan cita rasa autentik.
+              Setiap burger kami dibuat dengan patty pilihan, sayuran segar, dan
+              saus rahasia resep spesial.
+            </p>
+            <p>
+              Kami percaya bahwa makanan yang baik berasal dari bahan yang baik.
+              Itulah mengapa kami hanya menggunakan bahan-bahan berkualitas
+              tinggi, roti yang dipanggang setiap hari, dan sayuran segar dari
+              supplier terpercaya.
+            </p>
+            <!-- 4 Fitur utama dengan animasi zoom -->
+            <div class="features-grid zoom-in">
+              <div class="feature-item">
+                <div class="feature-icon">🥩</div>
+                <div class="feature-text">
+                  <h4>Quality Meat</h4>
+                  <p>Daging pilihan</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🌿</div>
+                <div class="feature-text">
+                  <h4>Fresh Daily</h4>
+                  <p>Bahan segar</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">👨‍🍳</div>
+                <div class="feature-text">
+                  <h4>Expert Chef</h4>
+                  <p>Chef berpengalaman</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">
+                  <h4>Fast Service</h4>
+                  <p>Pelayanan cepat</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================
+       MENU SECTION
+       Daftar burger & minuman
+       ========================================== -->
+    <section id="menu">
+      <div class="container">
+        <!-- Header Section dengan animasi blur -->
+        <div class="section-header blur-in">
+          <div class="section-tag">MENU KAMI</div>
+          <h2 class="section-title font-display">PILIHAN BURGER</h2>
+        </div>
+        <!-- Grid 6 Menu Burger dengan animasi flip -->
+        <div class="menu-grid flip-up">
+          <!-- Menu 1: Chicken Trass Burger -->
+          <div class="menu-card">
+            <div class="menu-icon">🍗</div>
+            <div class="menu-badge">CHICKEN</div>
+            <h3 class="menu-title font-display">CHICKEN TRASS BURGER</h3>
+            <p class="menu-desc">
+              Burn burger, pickle, chicken patty, salad dressing, garlic sauce,
+              BBQ sauce
+            </p>
+            <div class="menu-price font-display">Rp 30K</div>
+            <button class="menu-btn">+ Tambah</button>
+          </div>
+          <!-- Menu 2: Dang It Burger -->
+          <div class="menu-card">
+            <div class="menu-icon">🍔</div>
+            <div class="menu-badge">BEEF</div>
+            <h3 class="menu-title font-display">DANG IT BURGER</h3>
+            <p class="menu-desc">
+              Beef patty, dressing salad, garlic sauce, pickles, caramelized
+              onion
+            </p>
+            <div class="menu-price font-display">Rp 38K</div>
+            <button class="menu-btn">+ Tambah</button>
+          </div>
+          <!-- Menu 3: Tropical Bacon Burger -->
+          <div class="menu-card">
+            <div class="menu-icon">🥓</div>
+            <div
+              class="menu-badge"
+              style="background: rgba(255, 165, 0, 0.2); color: #ffa500"
+            >
+              TROPICAL
+            </div>
+            <h3 class="menu-title font-display">TROPICAL BACON BURGER</h3>
+            <p class="menu-desc">
+              Double bacon, cheddar cheese, chimichurri sauce, salad coleslaw,
+              caramelized onion, garlic sauce
+            </p>
+            <div class="menu-price font-display">Rp 40K</div>
+            <button class="menu-btn">+ Tambah</button>
+          </div>
+          <!-- Menu 4: Pride Burger -->
+          <div class="menu-card">
+            <div class="menu-icon">🍖</div>
+            <div
+              class="menu-badge"
+              style="background: rgba(139, 69, 19, 0.3); color: #deb887"
+            >
+              PREMIUM
+            </div>
+            <h3 class="menu-title font-display">PRIDE BURGER</h3>
+            <p class="menu-desc">
+              Pork patty, cheddar cheese, caramelized onion, onion ring,
+              pickles, garlic mayo
+            </p>
+            <div class="menu-price font-display">Rp 43K</div>
+            <button class="menu-btn">+ Tambah</button>
+          </div>
+          <!-- Menu 5: Mustard Chicken -->
+          <div class="menu-card">
+            <div class="menu-icon">🍗</div>
+            <div
+              class="menu-badge"
+              style="background: rgba(255, 193, 7, 0.2); color: #ffc107"
+            >
+              CRISPY
+            </div>
+            <h3 class="menu-title font-display">MUSTARD CHICKEN</h3>
+            <p class="menu-desc">
+              Bread crumbs chicken patty, bacon, BBQ sauce, caramelized onion,
+              pickles, coleslaw, garlic mayo
+            </p>
+            <div class="menu-price font-display">Rp 43K</div>
+            <button class="menu-btn">+ Tambah</button>
+          </div>
+          <!-- Menu 6: Cheese In Burger (Featured) -->
+          <div class="menu-card featured">
+            <div class="menu-icon">🧀</div>
+            <div class="menu-badge">SIGNATURE</div>
+            <h3 class="menu-title font-display">CHEESE IN BURGER</h3>
+            <p class="menu-desc">
+              Beef patty, cheddar cheese, bacon, onion ring, cheese powder,
+              jalapeño, tartar sauce, pickles
+            </p>
+            <div class="menu-price font-display">Rp 45K</div>
+            <button class="menu-btn">+ Tambah</button>
+          </div>
+        </div>
+        <!-- Bagian Minuman dengan animasi bounce -->
+        <h3 class="drinks-title font-display bounce-in">DRINKS</h3>
+        <div class="drinks-grid rotate-in">
+          <!-- 4 Pilihan Minuman -->
+          <div class="drink-card">
+            <div class="drink-icon">🍋</div>
+            <div class="drink-name">Lemon Tea Ice</div>
+            <div class="drink-price font-display">Rp 12K</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-icon">🥤</div>
+            <div class="drink-name">Coca Cola</div>
+            <div class="drink-price font-display">Rp 10K</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-icon">🥤</div>
+            <div class="drink-name">Sprite</div>
+            <div class="drink-price font-display">Rp 10K</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-icon">💧</div>
+            <div class="drink-name">Mineral Water</div>
+            <div class="drink-price font-display">Rp 3K</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================
+       CONTACT SECTION
+       Info kontak, form, dan Google Maps
+       ========================================== -->
+    <section id="contact">
+      <div class="container">
+        <!-- Header Section dengan animasi zoom -->
+        <div class="section-header zoom-in">
+          <div class="section-tag">HUBUNGI KAMI</div>
+          <h2 class="section-title font-display">KONTAK &amp; LOKASI</h2>
+        </div>
+        <div class="contact-grid">
+          <!-- Kolom Kiri: Info Kontak - slide dari kiri -->
+          <div class="contact-card slide-left">
+            <h3 class="contact-title font-display">INFO KONTAK</h3>
+            <div class="contact-info">
+              <!-- Alamat -->
+              <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-details">
+                  <h4>Alamat</h4>
+                  <p>Jl. Sudirman No. 123, Lantai 2, Jakarta Pusat 10220</p>
+                </div>
+              </div>
+              <!-- Telepon -->
+              <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-details">
+                  <h4>Telepon</h4>
+                  <p>+62 812 3456 7890</p>
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="contact-item">
+                <div class="contact-icon">✉️</div>
+                <div class="contact-details">
+                  <h4>Email</h4>
+                  <p>info@houseofburger.com</p>
+                </div>
+              </div>
+              <!-- Jam Operasional -->
+              <div class="contact-item">
+                <div class="contact-icon">🕐</div>
+                <div class="contact-details">
+                  <h4>Jam Operasional</h4>
+                  <p>Senin - Jumat: 10:00 - 22:00</p>
+                  <p>Sabtu - Minggu: 09:00 - 23:00</p>
+                </div>
+              </div>
+            </div>
+            <!-- Social Media -->
+            <div class="social-links">
+              <h4>Follow Us</h4>
+              <div class="social-icons">
+                <a href="#" class="social-icon">📱</a>
+                <a href="#" class="social-icon">📸</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">▶️</a>
+              </div>
+            </div>
+          </div>
+          <!-- Kolom Kanan: Form Kontak - slide dari kanan -->
+          <div class="contact-card slide-right">
+            <h3 class="contact-title font-display">KIRIM PESAN</h3>
+            <form id="contactForm">
+              <!-- Input Nama -->
+              <div class="form-group">
+                <label for="name">Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Masukkan nama Anda"
+                  required
+                />
+              </div>
+              <!-- Input Email -->
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="email@example.com"
+                  required
+                />
+              </div>
+              <!-- Select Subjek -->
+              <div class="form-group">
+                <label for="subject">Subjek</label>
+                <select id="subject" name="subject">
+                  <option value="">Pilih subjek</option>
+                  <option value="reservation">Reservasi</option>
+                  <option value="catering">Catering</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="other">Lainnya</option>
+                </select>
+              </div>
+              <!-- Textarea Pesan -->
+              <div class="form-group">
+                <label for="message">Pesan</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Tulis pesan Anda..."
+                  required
+                ></textarea>
+              </div>
+              <!-- Tombol Submit -->
+              <button type="submit" class="submit-btn">Kirim Pesan 📨</button>
+              <!-- Pesan sukses (muncul setelah submit) -->
+              <div id="formSuccess" class="form-success">
+                ✅ Pesan Anda telah terkirim!
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Google Maps Embed dengan animasi fade -->
+        <div class="map-container fade-in">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d293.. !2d115.. !3d-8.. !2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd217004289bb55%3A0xaa9f67a8674402b2!2sHouse%20Of%20Burger!5e0!3m2!1sid!2sid!4v. !5m2!1sid!2sid"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================
+       FOOTER
+       Copyright & links
+       ========================================== -->
+    <footer>
+      <div class="footer-content">
+        <!-- Logo di footer -->
+        <div class="footer-logo">
+          <span class="logo-icon">🍔</span>
+          <span class="footer-logo-text font-display">HOUSE OF BURGER</span>
+        </div>
+        <!-- Copyright text -->
+        <p class="footer-text">© 2024 House of Burger. All rights reserved.</p>
+        <!-- Footer links -->
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </footer>
+    <!-- ==========================================
+       JAVASCRIPT
+       Semua interaksi & animasi
+       ========================================== -->
+    <script>
+      /* ========================================
+       1. NAVIGATION ACTIVE STATE
+       Mengubah warna link yang aktif berdasarkan scroll
+       ======================================== */
+
+      // Ambil semua link navigasi
+      const navLinks = document.querySelectorAll(".nav-link");
+      // Ambil semua section di halaman
+      const sections = document.querySelectorAll("section");
+
+      // Event listener saat user scroll
+      window.addEventListener("scroll", () => {
+        let current = ""; // Variable untuk nyimpan section yang aktif
+
+        // Loop semua section untuk cek mana yang sedang dilihat
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop; // Jarak section dari atas
+          const sectionHeight = section.clientHeight; // Tinggi section
+
+          // Kalau posisi scroll sudah melewati section ini (dikurangi 200px buffer)
+          if (scrollY >= sectionTop - 200) {
+            current = section.getAttribute("id"); // Ambil id section (home, about, dll)
+          }
+        });
+
+        // Loop semua link navigasi
+        navLinks.forEach((link) => {
+          link.classList.remove("active"); // Hapus class active dari semua link
+
+          // Kalau href link sama dengan section yang aktif, tambahkan class active
+          if (link.getAttribute("href").slice(1) === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      /* ========================================
+       2. SMOOTH SCROLL
+       Saat klik link navigasi, scroll halus ke section
+       ======================================== */
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault(); // Cegah behavior default (langsung jump)
+
+          const targetId = link.getAttribute("href"); // Ambil href (#home, #about, dll)
+          const targetSection = document.querySelector(targetId); // Cari section dengan id tersebut
+
+          // Scroll ke section dengan animasi smooth
+          targetSection.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      /* ========================================
+       3. SCROLL ANIMATIONS - BERULANG & VARIATIF
+       Animasi muncul saat scroll sampai ke section
+       Menggunakan berbagai jenis animasi yang berbeda
+       AKAN BERULANG setiap kali masuk/keluar viewport
+       ======================================== */
+
+      // Ambil semua elemen yang punya class animasi
+      const animatedElements = document.querySelectorAll(
+        ".fade-in, .slide-left, .slide-right, .zoom-in, .rotate-in, .flip-up, .bounce-in, .blur-in"
+      );
+
+      // Buat observer untuk deteksi saat elemen masuk/keluar viewport
+      const animationObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Kalau elemen terlihat di layar (masuk viewport)
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible"); // Tambah class visible untuk trigger animasi
+            } else {
+              // Kalau elemen keluar dari layar
+              entry.target.classList.remove("visible"); // Hapus class visible, balik ke state awal
+              // Nanti kalau di-scroll balik ke section ini, animasi akan muncul lagi!
+            }
+          });
+        },
+        {
+          threshold: 0.15, // Trigger saat 15% elemen terlihat
+          rootMargin: "0px 0px -80px 0px", // Buffer 80px dari bawah
+        }
+      );
+
+      // Apply observer ke semua elemen dengan animasi
+      animatedElements.forEach((el) => {
+        animationObserver.observe(el);
+      });
+
+      /* ========================================
+       4. CONTACT FORM SUBMISSION
+       Handle submit form kontak
+       ======================================== */
+
+      const contactForm = document.getElementById("contactForm");
+      const formSuccess = document.getElementById("formSuccess");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault(); // Cegah form submit secara default (refresh halaman)
+
+        // Tampilkan pesan sukses
+        formSuccess.classList.add("show");
+
+        // Reset semua field form
+        contactForm.reset();
+
+        // Sembunyikan pesan sukses setelah 5 detik
+        setTimeout(() => {
+          formSuccess.classList.remove("show");
+        }, 5000);
+      });
+
+      /* ========================================
+       5. RUNNING TEXT DUPLICATION
+       Duplikasi konten running text biar seamless loop
+       ======================================== */
+
+      const runningText = document.querySelector(".running-text");
+      // Duplikasi innerHTML nya sendiri supaya pas looping ga ada gap
+      runningText.innerHTML = runningText.innerHTML + runningText.innerHTML;
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9bcd98aca480c031',t:'MTc2ODIzMDc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
