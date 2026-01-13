@@ -1260,6 +1260,25 @@ footer {
   .hero-buttons {
     justify-content: center;
   }
+
+    .modal-content {
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+  }
+
+  .order-form-group input,
+  .order-form-group select,
+  .order-form-group textarea {
+    font-size: 0.95rem;
+  }
+
+  .price-summary {
+    padding: 1.25rem;
+  }
 }
 
 /* Mobile - 768px ke bawah */
@@ -1271,7 +1290,7 @@ footer {
 
   .nav-links {
     position: fixed;
-    top: 70px;
+    top: 78px;
     left: 0;
     width: 100%;
     background: rgba(26, 26, 46, 0.98);
@@ -1300,22 +1319,29 @@ footer {
     font-size: 1.125rem;
   }
 
-  .order-btn {
-    margin-top: 1rem;
+  .nav-links .order-btn {
+    margin: 1rem auto 0;
+    display: inline-block;
+    width: auto;
   }
 
   .mobile-menu-btn {
     display: block;
-    font-size: 2rem;
+    font-size: 1.75rem;
     z-index: 1001;
   }
 
   .logo-text {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+    letter-spacing: 0.05em;
   }
 
   .logo-icon {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  nav {
+    padding: 1rem 0;
   }
 
   /* Running Text */
@@ -1573,8 +1599,28 @@ footer {
   }
 
   /* Modal Responsive */
+    .order-modal {
+    padding: 1rem;
+  }
+
   .modal-content {
     padding: 2rem 1.5rem;
+    max-width: 100%;
+    width: 95%;
+    max-height: 85vh;
+    border-radius: 20px;
+  }
+
+  .close-modal {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+  }
+
+  .modal-header {
+    margin-bottom: 1.5rem;
   }
 
   .modal-title {
@@ -1585,8 +1631,13 @@ footer {
     font-size: 0.8rem;
   }
 
+  .order-form-group {
+    margin-bottom: 1.25rem;
+  }
+
   .order-form-group label {
     font-size: 0.8rem;
+    margin-bottom: 0.4rem;
   }
 
   .order-form-group input,
@@ -1594,11 +1645,51 @@ footer {
   .order-form-group textarea {
     font-size: 0.95rem;
     padding: 0.625rem 0.875rem;
+    border-radius: 12px;
+  }
+
+  .order-form-group textarea {
+    min-height: 70px;
+  }
+
+  .price-summary {
+    padding: 1rem;
+    margin: 1.25rem 0;
+    border-radius: 12px;
+  }
+
+  .price-row {
+    font-size: 0.875rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .price-row.total {
+    font-size: 1.125rem;
+    padding-top: 0.625rem;
+    margin-top: 0.625rem;
   }
 
   .order-submit-btn {
     font-size: 1rem;
     padding: 0.875rem;
+    border-radius: 12px;
+  }
+
+  .order-success {
+    padding: 1.5rem;
+  }
+
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .success-title {
+    font-size: 1.25rem;
+  }
+
+  .success-message {
+    font-size: 0.9rem;
   }
 }
 
@@ -1645,6 +1736,132 @@ footer {
 
   .logo-icon {
     font-size: 1.75rem;
+  }
+  .order-modal {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem 1rem;
+    width: 98%;
+    max-height: 90vh;
+    border-radius: 15px;
+  }
+
+  .close-modal {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1.125rem;
+  }
+
+  .modal-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .order-form-group {
+    margin-bottom: 1rem;
+  }
+
+  .order-form-group label {
+    font-size: 0.75rem;
+  }
+
+  .order-form-group input,
+  .order-form-group select,
+  .order-form-group textarea {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+  }
+
+  .order-form-group textarea {
+    min-height: 60px;
+  }
+
+  .price-summary {
+    padding: 0.875rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+  }
+
+  .price-row {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-row.total {
+    font-size: 1rem;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .order-submit-btn {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+  }
+
+  .order-success {
+    padding: 1.25rem;
+  }
+
+  .success-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .success-title {
+    font-size: 1.125rem;
+  }
+
+  .success-message {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Extra Small - 360px ke bawah */
+@media (max-width: 360px) {
+  .modal-content {
+    padding: 1.25rem 0.875rem;
+    border-radius: 12px;
+  }
+
+  .modal-title {
+    font-size: 1.125rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .order-form-group input,
+  .order-form-group select,
+  .order-form-group textarea {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .price-row {
+    font-size: 0.75rem;
+  }
+
+  .price-row.total {
+    font-size: 0.95rem;
+  }
+
+  .order-submit-btn {
+    font-size: 0.875rem;
+    padding: 0.625rem;
   }
 }
 
