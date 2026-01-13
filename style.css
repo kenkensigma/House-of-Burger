@@ -10,13 +10,15 @@
 }
 
 body {
+  overflow-x: hidden; /* Cegah scroll horizontal */
   font-family: "Poppins", sans-serif; /* Font utama untuk semua teks */
   background-color: #1a1a2e; /* Warna background gelap */
   color: #f5f5f5; /* Warna teks putih keabuan */
-  overflow-x: hidden; /* Cegah scroll horizontal */
 }
 
 html {
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
   scroll-behavior: smooth; /* Biar scroll nya smooth/halus */
 }
 
@@ -31,6 +33,7 @@ html {
        ========================================== */
 
 .bg-pattern {
+  overflow: hidden;
   position: fixed; /* Tetap di tempat saat scroll */
   top: 0;
   left: 0;
@@ -40,6 +43,12 @@ html {
   background-color: #1a1a2e;
   /* Pattern SVG berulang untuk dekorasi */
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bg-pattern:before {
+  width: 100%;
+  left: 0;
+  right: 0;
 }
 
 /* ==========================================
@@ -1031,7 +1040,7 @@ footer {
   border: 2px solid rgba(255, 107, 53, 0.3);
   border-radius: 30px;
   padding: 2.5rem;
-  max-width: 500px;
+  max-width: 900px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
@@ -1042,6 +1051,10 @@ footer {
 
 .order-modal.show .modal-content {
   transform: scale(1);
+}
+
+.modal-content::-webkit-scrollbar {
+    display: none;
 }
 
 .close-modal {
@@ -1261,7 +1274,7 @@ footer {
     justify-content: center;
   }
 
-    .modal-content {
+  .modal-content {
     max-width: 600px;
     padding: 2rem;
   }
@@ -1599,7 +1612,7 @@ footer {
   }
 
   /* Modal Responsive */
-    .order-modal {
+  .order-modal {
     padding: 1rem;
   }
 
